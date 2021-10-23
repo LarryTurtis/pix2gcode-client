@@ -1,11 +1,12 @@
 import Canvas from "./components/Canvas";
-import logo from "./logo.svg";
 import "./App.css";
+import FileUploader from "./components/FileUploader";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <FileUploader />
         <Canvas />
         <p>
           Edit <code>src/App.js</code> and save to reload.
