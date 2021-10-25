@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react";
-import { isCompositeComponent } from "react-dom/test-utils";
 import { useSelector } from "react-redux";
 
 const Canvas = (props) => {
@@ -7,14 +6,19 @@ const Canvas = (props) => {
   const imageUrl = useSelector((state) => state.image.imageUrl);
 
   const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [mouseStart, setMouseStart] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
 
   const maybeUpdateImage = (e) => {
-    console.log(e);
+    const canvas = canvasRef.current;
+
     if (isDragging) {
-      const x = pos.x + e.movementX;
-      const y = pos.y + e.movementY;
-      setPos({ x, y });
+      let mouseX = e.clientX - canvas.offsetLeft;
+      let mouseY = e.clientY - canvas.offsetTop;
+      const dx = (mouseX - mouseStart.x) / 10;
+      const dy = (mouseY - mouseStart.y) / 10;
+      setMouseStart({ x: mouseX, y: mouseY });
+      setPos({ x: pos.x + dx, y: pos.y + dy });
     }
   };
 
@@ -39,8 +43,18 @@ const Canvas = (props) => {
         height={50}
         ref={canvasRef}
         {...props}
-        onMouseDown={(e) => setIsDragging(true)}
-        onMouseUp={() => setIsDragging(false)}
+        onMouseDown={(e) => {
+          let canvas = canvasRef.current;
+          setMouseStart({
+            x: e.clientX - canvas.offsetLeft,
+            y: e.clientY - canvas.offsetTop,
+          });
+          setIsDragging(true);
+        }}
+        onMouseUp={() => {
+          setIsDragging(false);
+          setPos({ x: Math.floor(pos.x), y: Math.floor(pos.y) });
+        }}
         onMouseMove={(e) => maybeUpdateImage(e)}
       />
     </div>
