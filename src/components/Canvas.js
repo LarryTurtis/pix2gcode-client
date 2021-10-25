@@ -3,11 +3,14 @@ import { useSelector } from "react-redux";
 
 const Canvas = (props) => {
   const canvasRef = useRef(null);
-  const imageUrl = useSelector((state) => state.image.imageUrl);
+  const image = useSelector((state) => {
+    return state.image.image;
+  });
 
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [mouseStart, setMouseStart] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
+  let scaleFactor = 0.1;
 
   const maybeUpdateImage = (e) => {
     const canvas = canvasRef.current;
@@ -15,32 +18,45 @@ const Canvas = (props) => {
     if (isDragging) {
       let mouseX = e.clientX - canvas.offsetLeft;
       let mouseY = e.clientY - canvas.offsetTop;
-      const dx = (mouseX - mouseStart.x) / 10;
-      const dy = (mouseY - mouseStart.y) / 10;
+      const dx = (mouseX - mouseStart.x) * scaleFactor;
+      const dy = (mouseY - mouseStart.y) * scaleFactor;
       setMouseStart({ x: mouseX, y: mouseY });
       setPos({ x: pos.x + dx, y: pos.y + dy });
     }
   };
 
+  const localImg = useRef(new Image());
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    //Our first draw
     context.fillStyle = "#000000";
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-    const img = new Image();
-    img.onload = function () {
-      context.drawImage(img, pos.x, pos.y); // Or at whatever offset you like
+
+    localImg.current.onload = () => {
+      context.drawImage(localImg.current, pos.x, pos.y); // Or at whatever offset you like
     };
-    img.src = imageUrl;
-    console.log(pos);
+    if (image) localImg.current.src = image.imageUrl;
+
+    let cwidth = getComputedStyle(canvas).getPropertyValue("width");
+    let iwidth = image.dimensions.width;
+    scaleFactor = iwidth / cwidth;
+  }, [image]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    context.fillStyle = "#000000";
+    context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+    if (localImg.current.src) context.drawImage(localImg.current, pos.x, pos.y); // Or at whatever offset you like
   });
+
+  const canvasSize = Math.max(image.dimensions.width, image.dimensions.height);
 
   return (
     <div>
       <canvas
-        width={25}
-        height={50}
+        width={canvasSize}
+        height={canvasSize}
         ref={canvasRef}
         {...props}
         onMouseDown={(e) => {
