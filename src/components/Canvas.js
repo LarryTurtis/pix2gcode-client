@@ -1,11 +1,25 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-
+import { dataURItoBlob } from "../util";
+import { useMainMutation } from "../services/pix2Code";
 const Canvas = (props) => {
   const canvasRef = useRef(null);
+  const [
+    callMain, // This is the mutation trigger
+    result,
+  ] = useMainMutation();
   const image = useSelector((state) => {
     return state.image.image;
   });
+
+  const save = () => {
+    const canvas = canvasRef.current;
+    var dataURL = canvas.toDataURL();
+    var blob = dataURItoBlob(dataURL);
+    var fd = new FormData(document.forms[0]);
+    fd.append("file", blob);
+    callMain(fd);
+  };
 
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [mouseStart, setMouseStart] = useState({ x: 0, y: 0 });
@@ -14,7 +28,6 @@ const Canvas = (props) => {
 
   const maybeUpdateImage = (e) => {
     const canvas = canvasRef.current;
-
     if (isDragging) {
       let mouseX = e.clientX - canvas.offsetLeft;
       let mouseY = e.clientY - canvas.offsetTop;
@@ -51,7 +64,7 @@ const Canvas = (props) => {
   });
 
   const canvasSize = Math.max(image.dimensions.width, image.dimensions.height);
-
+  console.log("result", result);
   return (
     <div>
       <canvas
@@ -73,6 +86,7 @@ const Canvas = (props) => {
         }}
         onMouseMove={(e) => maybeUpdateImage(e)}
       />
+      <button onClick={() => save()}>Save</button>
     </div>
   );
 };

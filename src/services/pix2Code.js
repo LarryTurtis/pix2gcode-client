@@ -5,15 +5,19 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const pix2CodeApi = createApi({
   reducerPath: "pix2CodeApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_URL}/greeting`,
+    baseUrl: `${process.env.REACT_APP_URL}/upload`,
   }),
   endpoints: (builder) => ({
-    main: builder.query({
-      query: () => `/`,
+    main: builder.mutation({
+      query: (body) => ({
+        url: "/",
+        method: "POST",
+        body,
+      }),
     }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useMainQuery } = pix2CodeApi;
+export const { useMainMutation } = pix2CodeApi;

@@ -1,10 +1,8 @@
 import React from "react";
 import { upload } from "../store/imageSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useMainQuery } from "../services/pix2Code";
 
 const FileUploader = (props) => {
-  const { data, error, isLoading } = useMainQuery();
   const imageUrl = useSelector((state) => state.image.imageUrl);
   const dispatch = useDispatch();
 
@@ -28,7 +26,6 @@ const FileUploader = (props) => {
 
   return (
     <div>
-      {data && data.id}
       <p>Image Url: {imageUrl}</p>
       <label className="btn btn-default">
         <input type="file" onChange={handleImageUpdate} />
