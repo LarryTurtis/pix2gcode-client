@@ -14,6 +14,9 @@ export const pix2CodeApi = createApi({
         method: "POST",
         body,
       }),
+      transformResponse: (response) => {
+        return response.content.split("\n");
+      },
     }),
   }),
 });

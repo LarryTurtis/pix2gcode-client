@@ -2,11 +2,12 @@ import React, { useRef, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { dataURItoBlob } from "../util";
 import { useMainMutation } from "../services/pix2Code";
+import Loader from "./Loader";
 const Canvas = (props) => {
   const canvasRef = useRef(null);
   const [
     callMain, // This is the mutation trigger
-    result,
+    { isLoading, data },
   ] = useMainMutation();
   const image = useSelector((state) => {
     return state.image.image;
@@ -64,9 +65,14 @@ const Canvas = (props) => {
   });
 
   const canvasSize = Math.max(image.dimensions.width, image.dimensions.height);
-  console.log("result", result);
+  console.log(data);
   return (
     <div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <code className="gcode">{data && data.map((el) => <p>{el}</p>)}</code>
+      )}
       <canvas
         width={canvasSize}
         height={canvasSize}

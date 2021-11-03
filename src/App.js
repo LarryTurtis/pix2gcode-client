@@ -1,5 +1,5 @@
 import Canvas from "./components/Canvas";
-import "./App.css";
+import "./css/App.css";
 import FileUploader from "./components/FileUploader";
 
 function App() {
