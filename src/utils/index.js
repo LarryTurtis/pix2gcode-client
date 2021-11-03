@@ -1,3 +1,9 @@
+import { MAX_PIXELS } from "./constants";
+
+export const calculateCanvasSize = (zoomLevel) => {
+  return (MAX_PIXELS * zoomLevel) / 100;
+};
+
 export const dataURItoBlob = (dataURI) => {
   // convert base64/URLEncoded data component to raw binary data held in a string
   var byteString;

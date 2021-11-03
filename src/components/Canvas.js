@@ -1,9 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { dataURItoBlob } from "../util";
+import { dataURItoBlob, calculateCanvasSize } from "../utils";
 import Zoomer from "./Zoomer";
-
-const MAX_PIXELS = 500;
 
 const Canvas = (props) => {
   const canvasRef = useRef(null);
@@ -59,13 +57,13 @@ const Canvas = (props) => {
   });
 
   // We will show the whole image if we can
-  const relevantDimension = Math.max(
-    image.dimensions.width,
-    image.dimensions.height
-  );
+  // const relevantDimension = Math.max(
+  //   image.dimensions.width,
+  //   image.dimensions.height
+  // );
 
   // But if the image is larger than 50px either width or height will be cropped
-  const canvasSize = (MAX_PIXELS * zoomLevel) / 100;
+  const canvasSize = calculateCanvasSize(zoomLevel);
   return (
     <div>
       <canvas
