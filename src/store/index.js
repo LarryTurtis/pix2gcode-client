@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import imageReducer from "./imageSlice";
+import zoomReducer from "./zoomSlice";
 import { pix2CodeApi } from "../services/pix2Code";
 
 export const store = configureStore({
   reducer: {
     image: imageReducer,
+    zoom: zoomReducer,
     // Add the generated reducer as a specific top-level slice
     [pix2CodeApi.reducerPath]: pix2CodeApi.reducer,
   },

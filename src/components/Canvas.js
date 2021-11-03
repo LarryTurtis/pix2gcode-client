@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { dataURItoBlob } from "../util";
 import { useMainMutation } from "../services/pix2Code";
 import Loader from "./Loader";
+import Zoomer from "./Zoomer";
 
 const MAX_PIXELS = 50;
 
@@ -101,6 +102,7 @@ const Canvas = (props) => {
         }}
         onMouseMove={(e) => maybeUpdateImage(e)}
       />
+      <Zoomer />
       <button onClick={() => save()}>Save</button>
     </div>
   );
