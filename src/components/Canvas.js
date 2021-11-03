@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import { dataURItoBlob } from "../util";
 import { useMainMutation } from "../services/pix2Code";
 import Loader from "./Loader";
+
+const MAX_PIXELS = 50;
+
 const Canvas = (props) => {
   const canvasRef = useRef(null);
   const [
@@ -64,8 +67,14 @@ const Canvas = (props) => {
     if (localImg.current.src) context.drawImage(localImg.current, pos.x, pos.y); // Or at whatever offset you like
   });
 
-  const canvasSize = Math.max(image.dimensions.width, image.dimensions.height);
-  console.log(data);
+  // We will show the whole image if we can
+  const relevantDimension = Math.max(
+    image.dimensions.width,
+    image.dimensions.height
+  );
+
+  // But if the image is larger than 50px either width or height will be cropped
+  const canvasSize = Math.min(relevantDimension, MAX_PIXELS);
   return (
     <div>
       {isLoading ? (
