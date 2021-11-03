@@ -1,21 +1,27 @@
 import React from "react";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
 import { zoom } from "../store/zoomSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-let counter = 0;
-
 const Zoomer = (props) => {
-  const zoomLevel = useSelector((state) => state.zoom);
+  const zoomLevel = useSelector((state) => state.zoom.value);
   const dispatch = useDispatch();
 
   const handleZoomUpdate = (e) => {
-    dispatch(zoom(counter++));
+    dispatch(zoom(e));
   };
 
   return (
     <div>
       <label className="btn btn-default">
-        <button onClick={handleZoomUpdate}>Click!</button>
+        <Slider
+          min={1}
+          default={100}
+          reverse
+          value={zoomLevel}
+          onChange={handleZoomUpdate}
+        />
       </label>
     </div>
   );

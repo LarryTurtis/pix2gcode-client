@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const DEFAULT = 100;
+
 const initialState = {
-  value: 0,
+  value: DEFAULT,
 };
 
 export const zoomSlice = createSlice({
@@ -11,10 +13,13 @@ export const zoomSlice = createSlice({
     zoom: (state, action) => {
       state.value = action.payload;
     },
+    zoomToDefault: (state) => {
+      state.value = DEFAULT;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { zoom } = zoomSlice.actions;
+export const { zoom, zoomToDefault } = zoomSlice.actions;
 
 export default zoomSlice.reducer;

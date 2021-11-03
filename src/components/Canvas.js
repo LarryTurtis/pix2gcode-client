@@ -5,7 +5,7 @@ import { useMainMutation } from "../services/pix2Code";
 import Loader from "./Loader";
 import Zoomer from "./Zoomer";
 
-const MAX_PIXELS = 50;
+const MAX_PIXELS = 500;
 
 const Canvas = (props) => {
   const canvasRef = useRef(null);
@@ -16,6 +16,7 @@ const Canvas = (props) => {
   const image = useSelector((state) => {
     return state.image.image;
   });
+  const zoomLevel = useSelector((state) => state.zoom.value);
 
   const save = () => {
     const canvas = canvasRef.current;
@@ -29,15 +30,14 @@ const Canvas = (props) => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [mouseStart, setMouseStart] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
-  let scaleFactor = 0.1;
 
   const maybeUpdateImage = (e) => {
     const canvas = canvasRef.current;
     if (isDragging) {
       let mouseX = e.clientX - canvas.offsetLeft;
       let mouseY = e.clientY - canvas.offsetTop;
-      const dx = (mouseX - mouseStart.x) * scaleFactor;
-      const dy = (mouseY - mouseStart.y) * scaleFactor;
+      const dx = (mouseX - mouseStart.x) * (zoomLevel / 100);
+      const dy = (mouseY - mouseStart.y) * (zoomLevel / 100);
       setMouseStart({ x: mouseX, y: mouseY });
       setPos({ x: pos.x + dx, y: pos.y + dy });
     }
@@ -54,10 +54,6 @@ const Canvas = (props) => {
       context.drawImage(localImg.current, pos.x, pos.y); // Or at whatever offset you like
     };
     if (image) localImg.current.src = image.imageUrl;
-
-    let cwidth = getComputedStyle(canvas).getPropertyValue("width");
-    let iwidth = image.dimensions.width;
-    scaleFactor = iwidth / cwidth;
   }, [image]);
 
   useEffect(() => {
@@ -75,7 +71,7 @@ const Canvas = (props) => {
   );
 
   // But if the image is larger than 50px either width or height will be cropped
-  const canvasSize = Math.min(relevantDimension, MAX_PIXELS);
+  const canvasSize = (MAX_PIXELS * zoomLevel) / 100;
   return (
     <div>
       {isLoading ? (
