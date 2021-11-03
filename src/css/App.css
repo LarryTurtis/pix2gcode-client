@@ -35,6 +35,10 @@ code {
   color: white;
 }
 
+.App-content {
+  display: flex;
+}
+
 .App-link {
   color: #61dafb;
 }

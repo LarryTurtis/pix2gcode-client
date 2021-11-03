@@ -1,18 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { dataURItoBlob } from "../util";
-import { useMainMutation } from "../services/pix2Code";
-import Loader from "./Loader";
 import Zoomer from "./Zoomer";
 
 const MAX_PIXELS = 500;
 
 const Canvas = (props) => {
   const canvasRef = useRef(null);
-  const [
-    callMain, // This is the mutation trigger
-    { isLoading, data },
-  ] = useMainMutation();
   const image = useSelector((state) => {
     return state.image.image;
   });
@@ -24,7 +18,7 @@ const Canvas = (props) => {
     var blob = dataURItoBlob(dataURL);
     var fd = new FormData(document.forms[0]);
     fd.append("file", blob);
-    callMain(fd);
+    props.save(fd);
   };
 
   const [pos, setPos] = useState({ x: 0, y: 0 });
@@ -74,11 +68,6 @@ const Canvas = (props) => {
   const canvasSize = (MAX_PIXELS * zoomLevel) / 100;
   return (
     <div>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <code className="gcode">{data && data.map((el) => <p>{el}</p>)}</code>
-      )}
       <canvas
         width={canvasSize}
         height={canvasSize}
@@ -99,7 +88,7 @@ const Canvas = (props) => {
         onMouseMove={(e) => maybeUpdateImage(e)}
       />
       <Zoomer />
-      <button onClick={() => save()}>Save</button>
+      <button onClick={save}>Save</button>
     </div>
   );
 };

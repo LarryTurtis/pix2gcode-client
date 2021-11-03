@@ -7,16 +7,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code.gcode {
+textarea.gcode {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-  background-color: black;
   height: 500px;
-  width: 500px;
+  width: 200px;
   overflow: scroll;
   display: inline-block;
   margin-left: 10px;
-  padding: 20px;
+  padding: 5px;
   box-sizing: border-box;
   text-align: left;
+  white-space: pre;
+  overflow-wrap: normal;
 }
