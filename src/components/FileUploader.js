@@ -28,8 +28,8 @@ const FileUploader = (props) => {
 
   return (
     <div>
-      <p>Image Url: {imageUrl}</p>
       <label className="btn btn-default">
+        Image: {imageUrl}
         <input type="file" onChange={handleImageUpdate} />
       </label>
     </div>

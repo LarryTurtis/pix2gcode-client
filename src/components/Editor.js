@@ -14,7 +14,7 @@ const Editor = ({ content, isLoading }) => {
     <AceEditor
       mode="gcode"
       theme="github"
-      name="UNIQUE_ID_OF_DIV"
+      name="editor"
       value={content}
       editorProps={{ $blockScrolling: true }}
     />

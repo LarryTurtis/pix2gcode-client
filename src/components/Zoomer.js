@@ -19,8 +19,8 @@ const Zoomer = (props) => {
     dispatch(updatePixelSize(e));
   };
   return (
-    <div>
-      <label className="btn btn-default">
+    <div className="sliders">
+      <p>
         Zoom
         <Slider
           min={1}
@@ -30,8 +30,8 @@ const Zoomer = (props) => {
           ariaLabelForHandle="Zoom"
           onChange={handleZoomUpdate}
         />
-      </label>
-      <label className="btn btn-default">
+      </p>
+      <p>
         Pixel Size
         <Slider
           min={1}
@@ -41,7 +41,7 @@ const Zoomer = (props) => {
           ariaLabelForHandle="Pixel Size"
           onChange={handlePixelSizeUpdate}
         />
-      </label>
+      </p>
     </div>
   );
 };

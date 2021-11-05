@@ -4,6 +4,7 @@ import { useMainMutation } from "./services/pix2Code";
 import FileUploader from "./components/FileUploader";
 import Editor from "./components/Editor";
 import Info from "./components/Info";
+import Zoomer from "./components/Zoomer";
 
 function App() {
   const [
@@ -16,13 +17,18 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        Pix2Code
+        <p className="main">PX2GC</p>
+        <p className="sub">convert pixel sprites to gcode</p>
+        <hr />
         <div className="App-content">
-          <FileUploader />
-          <Editor isLoading={isLoading} content={data} />
+          <div className="controls">
+            <FileUploader />
+            <Info />
+            <Zoomer />
+          </div>
           <Canvas save={handleSave} />
+          <Editor isLoading={isLoading} content={data} />
         </div>
-        <Info />
       </header>
     </div>
   );

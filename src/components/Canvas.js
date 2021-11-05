@@ -87,8 +87,9 @@ const Canvas = (props) => {
         }}
         onMouseMove={(e) => maybeUpdateImage(e)}
       />
-      <Zoomer />
-      <button onClick={save}>Save</button>
+      <p>
+        <button onClick={save}>Save</button>
+      </p>
     </div>
   );
 };

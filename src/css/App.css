@@ -3,11 +3,20 @@ canvas {
   width: 500px;
   height: 500px;
 }
+
+table,
+#editor {
+  min-width: 300px;
+}
 code {
   font-family: Consolas, "courier new";
   color: crimson;
   padding: 2px;
   font-size: 50%;
+}
+
+hr {
+  width: 100%;
 }
 .App {
   text-align: center;
@@ -35,8 +44,51 @@ code {
   color: white;
 }
 
+.App-header .main {
+  font-family: "Press Start 2P", cursive;
+  font-size: calc(20px + 2vmin);
+  line-height: 0;
+}
+.App-header .sub {
+  font-family: "Press Start 2P", cursive;
+  font-size: calc(2vmin);
+  line-height: 0;
+}
+
 .App-content {
   display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.App-content > div.controls {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: calc(5px + 1vmin);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.controls > div {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.controls .sliders {
+  width: 100%;
+  text-align: left;
+}
+
+.App-content > div {
+  flex: auto;
 }
 
 .App-link {
