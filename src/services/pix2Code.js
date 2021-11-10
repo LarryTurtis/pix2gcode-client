@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const pix2CodeApi = createApi({
   reducerPath: "pix2CodeApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_URL}/upload`,
+    baseUrl: `/upload`,
   }),
   endpoints: (builder) => ({
     main: builder.mutation({
