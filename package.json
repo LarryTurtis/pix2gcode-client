@@ -2,6 +2,7 @@
   "name": "pix2gcode-client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://garykertis.com/px2gc",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.14.1",
