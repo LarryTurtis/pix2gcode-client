@@ -2,12 +2,9 @@ canvas {
   image-rendering: crisp-edges;
   width: 500px;
   height: 500px;
+  padding-right: 10px;
 }
 
-table,
-#editor {
-  min-width: 300px;
-}
 code {
   font-family: Consolas, "courier new";
   color: crimson;
@@ -63,23 +60,25 @@ hr {
   box-sizing: border-box;
 }
 
+.App-content > div {
+  padding: 10px;
+}
+
 .App-content > div.controls {
   display: flex;
-  flex: 1 1 auto;
-  justify-content: center;
-  align-items: center;
+  flex: 1 1 200px;
   flex-direction: column;
   font-size: calc(5px + 1vmin);
-  padding: 10px;
   box-sizing: border-box;
+  text-align: left;
 }
 
 .controls > div {
-  flex: 1 1 0;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
   width: 100%;
+}
+
+.file-uploader {
+  margin: 10px 0px;
 }
 
 .controls .sliders {
@@ -87,8 +86,19 @@ hr {
   text-align: left;
 }
 
-.App-content > div {
-  flex: auto;
+.controls {
+  flex: 1 0 200px;
+}
+.views {
+  flex: 1 0 700px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.editor-container {
+  width: 100%;
+  flex: 1 1 200px;
 }
 
 .App-link {

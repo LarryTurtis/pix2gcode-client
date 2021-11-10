@@ -27,7 +27,7 @@ const FileUploader = (props) => {
   };
 
   return (
-    <div>
+    <div className="file-uploader">
       <label className="btn btn-default">
         Image: {imageUrl}
         <input type="file" onChange={handleImageUpdate} />

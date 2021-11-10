@@ -26,8 +26,10 @@ function App() {
             <Info />
             <Zoomer />
           </div>
-          <Canvas save={handleSave} />
-          <Editor isLoading={isLoading} content={data} />
+          <div className="views">
+            <Canvas save={handleSave} />
+            <Editor isLoading={isLoading} content={data} />
+          </div>
         </div>
       </header>
     </div>

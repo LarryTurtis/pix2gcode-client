@@ -11,13 +11,16 @@ const Editor = ({ content, isLoading }) => {
   }
 
   return (
-    <AceEditor
-      mode="gcode"
-      theme="github"
-      name="editor"
-      value={content}
-      editorProps={{ $blockScrolling: true }}
-    />
+    <div class="editor-container">
+      <AceEditor
+        mode="gcode"
+        theme="github"
+        name="editor"
+        value={content}
+        width="100%"
+        editorProps={{ $blockScrolling: true }}
+      />
+    </div>
   );
 };
 

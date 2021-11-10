@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { dataURItoBlob, calculateCanvasSize } from "../utils";
-import Zoomer from "./Zoomer";
 
 const Canvas = (props) => {
   const canvasRef = useRef(null);
