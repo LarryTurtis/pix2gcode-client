@@ -1,1 +1,1 @@
-export const MAX_PIXELS = 500;
+export const MAX_PIXELS = 250;
