@@ -29,7 +29,7 @@ const Zoomer = (props) => {
       <p>
         Zoom
         <Slider
-          min={1}
+          min={2}
           default={100}
           reverse
           value={zoomLevel}
@@ -51,9 +51,9 @@ const Zoomer = (props) => {
       <p>
         Pixel Shading
         <Slider
-          min={1}
-          default={4}
-          max={20}
+          min={0}
+          default={0}
+          max={10}
           value={pixelShading}
           ariaLabelForHandle="Pixel Shading"
           onChange={handlePixelShadingUpdate}

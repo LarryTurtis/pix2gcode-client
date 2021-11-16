@@ -9,6 +9,7 @@ const Canvas = (props) => {
   });
   const zoomLevel = useSelector((state) => state.zoom.value);
   const pixelSize = useSelector((state) => state.outputProps.pixelSize);
+  const pixelShading = useSelector((state) => state.outputProps.pixelShading);
 
   const save = () => {
     const canvas = canvasRef.current;
@@ -17,6 +18,7 @@ const Canvas = (props) => {
     var fd = new FormData(document.forms[0]);
     fd.append("file", blob);
     fd.append("pixelSize", pixelSize);
+    fd.append("pixelShading", pixelShading);
     props.save(fd);
   };
 

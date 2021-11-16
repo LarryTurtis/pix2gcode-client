@@ -6,6 +6,9 @@ const Info = (props) => {
   const pixelSize = useSelector((state) => {
     return state.outputProps.pixelSize;
   });
+  const pixelShading = useSelector((state) => {
+    return state.outputProps.pixelShading;
+  });
   const zoomLevel = useSelector((state) => state.zoom.value);
   const canvasSize = calculateCanvasSize(zoomLevel);
 
@@ -19,6 +22,10 @@ const Info = (props) => {
           <tr>
             <td>Px Sz</td>
             <td>{pixelSize}mm</td>
+          </tr>
+          <tr>
+            <td>Px Shad</td>
+            <td>{pixelShading}</td>
           </tr>
           <tr>
             <td>Vertical Px</td>
