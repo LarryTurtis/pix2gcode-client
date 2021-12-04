@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { dataURItoBlob, calculateCanvasSize } from "../utils";
-import { colors } from "../store/imageSlice";
 
 const Canvas = (props) => {
   const canvasRef = useRef(null);
@@ -11,7 +10,6 @@ const Canvas = (props) => {
   const zoomLevel = useSelector((state) => state.zoom.value);
   const pixelSize = useSelector((state) => state.outputProps.pixelSize);
   const pixelShading = useSelector((state) => state.outputProps.pixelShading);
-  const dispatch = useDispatch();
 
   const save = () => {
     const canvas = canvasRef.current;
@@ -58,24 +56,8 @@ const Canvas = (props) => {
     const context = canvas.getContext("2d");
     context.fillStyle = "#000000";
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-    findColors(context);
+    if (localImg.current.src) context.drawImage(localImg.current, pos.x, pos.y); // Or at whatever offset you like
   });
-
-  let findColors = (ctx) => {
-    let currentColors = {};
-    let data = ctx.getImageData(0, 0, canvasSize, canvasSize);
-
-    for (let i = 0; i < data.data.length - 4; i += 4) {
-      let currentPixelColor = `rgb(${data.data[i]}, ${data.data[i + 1]}, ${
-        data.data[i + 2]
-      }, ${data.data[i + 3]})`;
-
-      if (!currentColors[currentPixelColor]) {
-        currentColors[currentPixelColor] = true;
-      }
-    }
-    dispatch(colors(Object.keys(currentColors)));
-  };
 
   // We will show the whole image if we can
   // const relevantDimension = Math.max(
