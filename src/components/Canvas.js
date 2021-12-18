@@ -42,8 +42,8 @@ const Canvas = (props) => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    context.fillStyle = "#000000";
-    context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+    // context.fillStyle = "#000000";
+    // context.fillRect(0, 0, context.canvas.width, context.canvas.height);
 
     localImg.current.onload = () => {
       context.drawImage(localImg.current, pos.x, pos.y); // Or at whatever offset you like
@@ -54,8 +54,8 @@ const Canvas = (props) => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    context.fillStyle = "#000000";
-    context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+    // context.fillStyle = "#000000";
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     if (localImg.current.src) context.drawImage(localImg.current, pos.x, pos.y); // Or at whatever offset you like
   });
 
