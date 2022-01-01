@@ -6,6 +6,9 @@ import { updatePixelSize, updatePixelShading } from "../store/outputPropsSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const Zoomer = (props) => {
+  const sliderColor = "hotpink";
+  const trackStyle = { backgroundColor: sliderColor };
+  const handleStyle = { border: `2px solid ${sliderColor}` };
   const zoomLevel = useSelector((state) => state.zoom.value);
   const dispatch = useDispatch();
   const pixelSize = useSelector((state) => {
@@ -26,9 +29,11 @@ const Zoomer = (props) => {
   };
   return (
     <div className="sliders">
-      <p>
+      <label>
         Zoom
         <Slider
+          trackStyle={trackStyle}
+          handleStyle={handleStyle}
           min={2}
           default={100}
           reverse
@@ -36,10 +41,12 @@ const Zoomer = (props) => {
           ariaLabelForHandle="Zoom"
           onChange={handleZoomUpdate}
         />
-      </p>
-      <p>
+      </label>
+      <label>
         Pixel Size
         <Slider
+          trackStyle={trackStyle}
+          handleStyle={handleStyle}
           min={1}
           default={4}
           max={20}
@@ -47,10 +54,12 @@ const Zoomer = (props) => {
           ariaLabelForHandle="Pixel Size"
           onChange={handlePixelSizeUpdate}
         />
-      </p>
-      <p>
+      </label>
+      <label>
         Pixel Shading
         <Slider
+          trackStyle={trackStyle}
+          handleStyle={handleStyle}
           min={0}
           default={0}
           max={10}
@@ -58,7 +67,7 @@ const Zoomer = (props) => {
           ariaLabelForHandle="Pixel Shading"
           onChange={handlePixelShadingUpdate}
         />
-      </p>
+      </label>
     </div>
   );
 };

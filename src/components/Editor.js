@@ -11,7 +11,7 @@ const Editor = ({ content, isLoading }) => {
   }
 
   return (
-    <div class="editor-container">
+    <div className="editor-container">
       <AceEditor
         mode="gcode"
         theme="github"

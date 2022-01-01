@@ -73,7 +73,6 @@ const Canvas = (props) => {
         width={canvasSize}
         height={canvasSize}
         ref={canvasRef}
-        {...props}
         onMouseDown={(e) => {
           let canvas = canvasRef.current;
           setMouseStart({
@@ -89,7 +88,7 @@ const Canvas = (props) => {
         onMouseMove={(e) => maybeUpdateImage(e)}
       />
       <p>
-        <button onClick={save}>Save</button>
+        <button onClick={save}>Generate</button>
       </p>
     </div>
   );

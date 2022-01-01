@@ -7,9 +7,14 @@ canvas {
 }
 
 a,
-a:visited {
+a:visited,
+a:hover > .main {
   color: white;
   text-decoration: none;
+}
+
+a:hover {
+  color: hotpink;
 }
 
 code {
@@ -54,10 +59,75 @@ hr {
 }
 
 .App-header .about {
-  padding: 10px;
+  font-size: calc(5px + 1.5vmin);
 }
 
-nav > * {
+section {
+  max-width: 80vw;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: left;
+}
+
+section.footer {
+  padding: 0;
+  margin: 0;
+  font-size: 0.8em;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+section p {
+  margin: 0.5em;
+}
+
+i {
+  color: hotpink;
+}
+
+section ol,
+ul {
+  max-width: 50%;
+  text-align: left;
+  margin: 1em 0;
+}
+
+section li {
+  padding: 0.5em 0;
+}
+
+section li:first-child,
+section h3 {
+  padding: 0 0 0.5em 0;
+  margin: 0;
+}
+
+section a,
+section a:visited,
+section a:active {
+  color: hotpink;
+  text-decoration: underline;
+}
+
+em {
+  font-weight: bold;
+  color: hotpink;
+  display: block;
+  padding: 1em 0;
+  font-size: calc(5px + 1vmin);
+  font-style: normal;
+}
+
+em::before {
+  content: " NOTE: ";
+  font-style: italic;
+}
+
+nav > *,
+.sub {
   font-family: "Press Start 2P", cursive;
   font-size: calc(2vmin);
   line-height: 0;
@@ -66,7 +136,7 @@ nav > * {
 
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   width: 100%;
 }
 
@@ -102,6 +172,12 @@ nav {
 .controls .sliders {
   width: 100%;
   text-align: left;
+}
+
+.sliders label {
+  margin: 1em 0;
+
+  display: block;
 }
 
 .controls {
