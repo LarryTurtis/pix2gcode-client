@@ -6,6 +6,12 @@ canvas {
   background-color: black;
 }
 
+a,
+a:visited {
+  color: white;
+  text-decoration: none;
+}
+
 code {
   font-family: Consolas, "courier new";
   color: crimson;
@@ -37,7 +43,6 @@ hr {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -47,10 +52,22 @@ hr {
   font-size: calc(20px + 2vmin);
   line-height: 0;
 }
-.App-header .sub {
+
+.App-header .about {
+  padding: 10px;
+}
+
+nav > * {
   font-family: "Press Start 2P", cursive;
   font-size: calc(2vmin);
   line-height: 0;
+  margin: 0px 10px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .App-content {
